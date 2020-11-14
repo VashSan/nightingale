@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nightingale.Core\Nightingale.Core.csproj">
+      <Project>{8CA16448-C450-4106-8898-D52A1A564404}</Project>
+      <Name>Nightingale.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

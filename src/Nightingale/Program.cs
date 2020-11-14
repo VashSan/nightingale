@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nightingale.Core;
 
 namespace Nightingale
 {
@@ -10,6 +11,8 @@ namespace Nightingale
 	{
 		static void Main( string[] args )
 		{
+			var obs = new AudioDeviceObserver();
+			
 		}
 	}
 }
