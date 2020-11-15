@@ -6,14 +6,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NAudio.CoreAudioApi;
-using NAudio.Mixer;
+using Nightingale.AudioWrapper;
+
 
 namespace Nightingale.Core
 {
 	public class AudioDeviceObserver
 	{
-		private readonly MMDeviceEnumerator myDeviceEnumerator = new MMDeviceEnumerator();
+		private readonly MediaDeviceEnumerator myDeviceEnumerator = new MediaDeviceEnumerator();
 
 		public AudioDeviceObserver()
 		{
@@ -22,12 +22,11 @@ namespace Nightingale.Core
 
 		private void RefreshDevices()
 		{
-			var deviceCollection = myDeviceEnumerator.EnumerateAudioEndPoints( DataFlow.All, DeviceState.All );
 			while ( true )
 			{
 				Console.CursorTop = 0;
 				Console.CursorLeft = 0;
-				foreach ( var device in deviceCollection )
+				foreach ( var device in myDeviceEnumerator.Where( DeviceStateAvailableFunc() ) )
 				{
 					Dump( device );
 				}
@@ -35,31 +34,16 @@ namespace Nightingale.Core
 			}
 		}
 
-		private static void Dump( MMDevice device )
+		private static Func<IMediaDevice, bool> DeviceStateAvailableFunc()
 		{
-			CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-			switch ( device.State )
-			{
-				case DeviceState.Unplugged: // no cable connected?
-				case DeviceState.Disabled: // in windows disabled by user or system
-				case DeviceState.Active:
-					Console.WriteLine( $"{device.State.ToString().PadRight( 15 )}\t{device.DataFlow.ToString().PadRight( 15 )}\t{device.FriendlyName}" );
-					if ( device.State == DeviceState.Active )
-					{
-						var v = device.AudioEndpointVolume;
-						Console.WriteLine($"\tVolume: {v.MasterVolumeLevel} ( {v.VolumeRange.MinDecibels} -  {v.VolumeRange.MaxDecibels}, {v.VolumeRange.IncrementDecibels})");
-					}
-					break;
+			return d => d.State == DevicePresence.Active;
+		}
 
-				case DeviceState.NotPresent:
-					// Console.WriteLine( "device not present" );
-					break;
-
-				case DeviceState.All:
-				// fall through
-				default:
-					throw new ArgumentOutOfRangeException( $"Unknown or invalid device state: {device.State}" );
-			}
+		private static void Dump( IMediaDevice device )
+		{
+			Console.WriteLine( $"{device.State.ToString().PadRight( 15 )}\t{device.Usage.ToString().PadRight( 15 )}\t{device.Name}" );
+			var v = device.Volume;
+			Console.WriteLine($"\tVolume: {v.Level} ( {v.MinLevel} -  {v.MaxLevel}, {v.Increment})");
 		}
 	}
 }
