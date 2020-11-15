@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nightingale.Core", "Nightin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nightingale.Core.Test", "Nightingale.Core.Test\Nightingale.Core.Test.csproj", "{6D8618B6-07E2-47AE-8B86-9113B1E64B87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nightingale.AudioWrapper", "Nightingale.AudioWrapper\Nightingale.AudioWrapper.csproj", "{F355EAB9-EA73-4778-8382-EBF1BD8A12D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6D8618B6-07E2-47AE-8B86-9113B1E64B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D8618B6-07E2-47AE-8B86-9113B1E64B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D8618B6-07E2-47AE-8B86-9113B1E64B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F355EAB9-EA73-4778-8382-EBF1BD8A12D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F355EAB9-EA73-4778-8382-EBF1BD8A12D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F355EAB9-EA73-4778-8382-EBF1BD8A12D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F355EAB9-EA73-4778-8382-EBF1BD8A12D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
